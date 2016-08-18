@@ -23,10 +23,10 @@ function draw() {
 	var width = canvas.width;
 	var height = canvas.height;
  
-	var t0={x:512,y:512};
-	var t1={x:512-50,y:512};
-	var t2={x:512-50,y:512+50};
-	var t3={x:512,y:512+50};
+	var t0={x:x0,y:y0};
+	var t1={x:x0-50,y:y0};
+	var t2={x:x0-50,y:y0+50};
+	var t3={x:x0,y:y0+50};
 	var t= [];
 	t.push(t0);
 	t.push(t1);
