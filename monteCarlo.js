@@ -1,5 +1,5 @@
 var count;
-var n;
+var n=7500;
 var c= 0;
 var x =0;
 var y = 0;
@@ -18,8 +18,9 @@ function draw() {
 	var y0 = 0.5*canvas.height; // y0 pixels from top to y=0
 	var width = canvas.width;
 	var height = canvas.height;
-	crtanjeKruga(ctx,500,500,500,"rgba(255, 255, 255, 1)");
-	for(var i=0;i<100;i++)
+	var w2=width/2;
+	crtanjeKruga(ctx,w2,w2,w2,"rgba(255, 255, 255, 1)");
+	for(var i=0;i<n;i++)
 	{
 		y=getRandom(-1,1);
 		x=getRandom(-1,1);
@@ -33,10 +34,10 @@ function draw() {
 				color = "rgba(255, 0, 0, 1)";
 				
 		}
-		crtanjeKruga(ctx,x0+(x*500),y0+(y*500),5,color);
+		crtanjeKruga(ctx,x0+(x*w2),y0+(y*w2),5,color);
 		
 	}
-	pi = 4.0* (c/100);
+	pi = 4.0* (c/n);
 	
 }
 
@@ -59,6 +60,19 @@ function crtanjeKruga(ctx, x,y,r,color)
 	ctx.fillStyle = color;
 	ctx.fill();
 	ctx.stroke();
+}
+function uradi1()
+{
+	n=document.getElementById("textBox").value;
+	//alert(n);
+	var canvas = document.getElementById("canvas");
+	if (canvas == null || !canvas.getContext) 
+		return;
+
+	var ctx=canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height); // Clears the canvas
+	ctx.stroke();
+	draw();
 }
 function init(){
  
