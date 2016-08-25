@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head><title>Monte Carlo</title>
+	<head><title>Aproksimacija broj Pi po principu Monte Carlo</title>
 		<script type="text/javascript" src="monteCarlo.js"></script>
 	</head>
 	<body onload="init()">
+		<h1>Approximation of&nbsp;<strong>&pi;</strong></h1>
 		<form>
-		<b>Broj tacaka:</b> <input type="text" name="BrojTacaka" value="7500" id="textBox"><br>
+		<b>Broj tacaka:</b> <input type="text" style="position: absolute; top:75px; left:110px;" name="BrojTacaka" value="7500" id="textBox"><br>
 		</form>
-		<input type="button" style="position: absolute; top:9px; left:280px;" class="button gray "value="Uradi" id="dugme1" onclick="uradi1();">
-		<canvas id="canvas" width="750" height="750"></canvas><br>
+		<input type="button" style="position: absolute; top:75px; left:285px;" class="button gray "value="Uradi" id="dugme1" onclick="uradi1();">
+		<form>
+		<b>Broj PI iznosi:</b> <input type="text" name="BrojPi" style="position: absolute; top:96px; left:110px;" value="7500" id="textBox1"><br>
+		</form>
+		<canvas id="canvas" width="400" height="400"></canvas><br>
 	</body>
 </html>

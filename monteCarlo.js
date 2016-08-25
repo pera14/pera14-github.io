@@ -19,6 +19,9 @@ function draw() {
 	var width = canvas.width;
 	var height = canvas.height;
 	var w2=width/2;
+	c= 0;
+	x =0;
+	y = 0;
 	crtanjeKruga(ctx,w2,w2,w2,"rgba(255, 255, 255, 1)");
 	for(var i=0;i<n;i++)
 	{
@@ -34,11 +37,10 @@ function draw() {
 				color = "rgba(255, 0, 0, 1)";
 				
 		}
-		crtanjeKruga(ctx,x0+(x*w2),y0+(y*w2),5,color);
-		
+		crtanjeKruga(ctx,x0+(x*w2),y0+(y*w2),3,color);	
 	}
 	pi = 4.0* (c/n);
-	
+	document.getElementById("textBox1").value = pi;	
 }
 
 
