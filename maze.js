@@ -30,12 +30,12 @@ timer(
              //   0 1 2 3 4 5 6 7 8 9 A B C D E F
  var lavirint = [[0,1,1,0,0,0,0,1,0,1,1,1,1,0,1,0],
 				 [0,0,1,0,1,1,0,0,1,1,1,1,1,0,0,0],
-				 [1,0,1,0,0,0,1,0,1,1,1,1,1,0,1,0],
+				 [1,0,1,0,1,0,1,0,1,1,1,1,1,0,1,0],
 				 [0,0,0,0,1,0,1,0,0,0,1,0,0,0,1,0],
 				 [0,1,0,1,0,1,1,1,1,0,0,1,1,0,1,0],
 				 [0,1,0,0,0,1,0,0,1,1,0,0,1,0,1,0],
-				 [0,0,1,0,0,0,0,1,0,1,1,0,1,0,1,0],
-				 [1,0,0,0,1,1,1,1,0,0,0,0,0,0,1,2]
+				 [0,0,1,0,0,0,0,1,0,1,1,0,1,1,1,0],
+				 [1,0,0,0,1,1,1,1,0,0,0,0,0,0,0,2]
  ]
 function make_base(ctx)
 {
@@ -80,11 +80,15 @@ function draw() {
 		xx = 64*j;
 		yy = 64*i;
 		if(lavirint[i][j] ==1){
-			ctx.fillStyle = 'red';
+			ctx.fillStyle = 'gray';
 		} else if(lavirint[i][j] ==2){
-			ctx.fillStyle = 'white';
+			ctx.fillStyle = 'green';
+		}else if(lavirint[i][j]==3)
+		{
+			ctx.fillStyle = 'blue';
+			
 		}else{
-			ctx.fillStyle = 'rgba('+(15*16+7)+','+(13*16+3)+', '+(5*16+8)+', 255)';
+			ctx.fillStyle = 'white';
 			console.log(ctx.fillStyle);
 		}
 		ctx.fillRect(xx,yy,xx+64,yy+64);
@@ -126,13 +130,78 @@ function onkeydown(event)
 		slika.y = y;
 	}
 	draw();
-if(slika.x == 1024-64 && slika.y == 512-64)
+	if(slika.x == 1024-64 && slika.y == 512-64)
+	{
+		alert("You made it! :)");	
+		t=false;
+	}
+}
+var praviPut=[[]];
+function fillEmptyMap(array, width, height) {
+    for (var x = 0; x < width; x++) {
+        array[x] = [];
+        for (var y = 0; y < height; y++) {
+
+            array[x][y] = [0];
+        }
+    }
+}
+
+var pozicije=[[]];
+var n=0;
+
+function uradi1()
 {
-	alert("You made it! :)");	
-	t=false;
+	fillEmptyMap(praviPut,lavirint[0].length,lavirint[1].length);
+	var trenutnaPocijia = {r:0,c:0};
+	lavirint[trenutnaPocijia.r][trenutnaPocijia.c]=3;
+	console.log("konj")
+	while(trenutnaPocijia.r!=8 && trenutnaPocijia.c!=16){
+		if(trenutnaPocijia.c+1<17 && lavirint[trenutnaPocijia.r][trenutnaPocijia.c+1]==0 || lavirint[trenutnaPocijia.r][trenutnaPocijia.c+1]==2){
+			if(lavirint[trenutnaPocijia.r][trenutnaPocijia.c+1]==2)
+				break;
+			lavirint[trenutnaPocijia.r][trenutnaPocijia.c+1]=3;
+			pozicije[n][0]=trenutnaPocijia.r;
+			pozicije[n][1]=trenutnaPocijia.c;
+			trenutnaPocijia.c=trenutnaPocijia.c+1;
+			console.log("desno");
+			
+		}
+		else if(trenutnaPocijia.r+1<9 && lavirint[trenutnaPocijia.r+1][trenutnaPocijia.c]==0 || lavirint[trenutnaPocijia.r+1][trenutnaPocijia.c]==2){
+			if(lavirint[trenutnaPocijia.r+1][trenutnaPocijia.c]==2)
+				break;
+			lavirint[trenutnaPocijia.r+1][trenutnaPocijia.c]=3;
+			pozicije[n][0]=trenutnaPocijia.r;
+			pozicije[n][1]=trenutnaPocijia.c;
+			trenutnaPocijia.r=trenutnaPocijia.r+1;
+			console.log("dole");
+		}
+		else if(trenutnaPocijia.r!=0 && lavirint[trenutnaPocijia.r-1][trenutnaPocijia.c]==0 || lavirint[trenutnaPocijia.r-1][trenutnaPocijia.c]==2){
+			if(lavirint[trenutnaPocijia.r-1][trenutnaPocijia.c]==2)
+				break;
+				lavirint[trenutnaPocijia.r-1][trenutnaPocijia.c]=3;
+				pozicije[n][0]=trenutnaPocijia.r;
+				pozicije[n][1]=trenutnaPocijia.c;
+				trenutnaPocijia.r=trenutnaPocijia.r-1;
+				console.log("gore");
+			
+		}
+		else if(trenutnaPocijia.c!=0){
+			if(lavirint[trenutnaPocijia.r][trenutnaPocijia.c-1]==2)
+					break;
+			if(lavirint[trenutnaPocijia.r][trenutnaPocijia.c-1]==0)
+			{
+				lavirint[trenutnaPocijia.r][trenutnaPocijia.c-1]=3;
+				pozicije[n][0]=trenutnaPocijia.r;
+				pozicije[n][1]=trenutnaPocijia.c;
+				trenutnaPocijia.c=trenutnaPocijia.c-1;
+				console.log("levo");
+			}
+		}
+	}
+	draw();
+	
 }
-}
-  
   
 function init(){
 	draw();
